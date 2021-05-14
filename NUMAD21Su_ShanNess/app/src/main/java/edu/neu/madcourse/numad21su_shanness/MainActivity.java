@@ -10,7 +10,7 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
 
     TextView textview;
-    Button  showBtn;
+    Button showBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
