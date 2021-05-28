@@ -3,6 +3,14 @@ plugins {
 }
 
 android {
+    signingConfigs {
+        config {
+            storeFile file('/Users/shanli/AndroidStudioProjects/NUMAD21Su_ShanNess/key')
+            storePassword 'c9dengjikou'
+            keyAlias 'My Key'
+            keyPassword 'c9dengjikou'
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
 
@@ -20,6 +28,7 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
         }
     }
     compileOptions {
