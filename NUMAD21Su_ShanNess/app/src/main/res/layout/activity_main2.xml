@@ -7,7 +7,7 @@
     tools:context=".MainActivity2">
 
     <Button
-        android:id="@+id/button1"
+        android:id="@+id/botton1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="A"
@@ -70,4 +70,17 @@
         android:text="F"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="switchActivity"
+        android:text="Back"
+        app:layout_constraintBottom_toTopOf="@+id/botton1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.019"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.119" />
 </androidx.constraintlayout.widget.ConstraintLayout>
