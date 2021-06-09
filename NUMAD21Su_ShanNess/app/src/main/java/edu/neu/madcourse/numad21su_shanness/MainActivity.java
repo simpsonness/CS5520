@@ -40,6 +40,20 @@ public class MainActivity extends AppCompatActivity{
         });
 
 
+        Button LinkCollectorActivity = (Button) findViewById(R.id.buttonLink);
+
+        LinkCollectorActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentLink = new Intent(MainActivity.this, LinkCollectorActivity.class);
+                startActivity(intentLink);
+            }
+        });
+
+
+
+
+
         textview = (TextView) findViewById(R.id.name_txt);
         showBtn = (Button) findViewById(R.id.show_name);
         showBtn.setOnClickListener(new View.OnClickListener() {
