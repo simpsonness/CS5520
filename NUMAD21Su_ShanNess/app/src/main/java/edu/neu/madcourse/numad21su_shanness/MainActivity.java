@@ -39,6 +39,16 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        Button linksActivity = (Button) findViewById(R.id.buttonLink);
+
+        linksActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentLink = new Intent(MainActivity.this, ActivityLinkCollector.class);
+                startActivity(intentLink);
+            }
+        });
+
 
 
 
