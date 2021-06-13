@@ -49,7 +49,15 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        Button locationActivity = (Button) findViewById(R.id.buttonLocation);
 
+        locationActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentLocation = new Intent(MainActivity.this, LocationActivity.class);
+                startActivity(intentLocation);
+            }
+        });
 
 
         textview = (TextView) findViewById(R.id.name_txt);

@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="edu.neu.madcourse.numad21su_shanness">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_sn"
@@ -9,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_sn_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NUMAD21Su_ShanNess">
+        <activity android:name=".LocationActivity"></activity>
         <activity android:name=".ActivityLinkCollector" />
         <activity android:name=".MainActivity2" />
         <activity android:name=".MainActivity">
