@@ -59,6 +59,18 @@ public class MainActivity extends AppCompatActivity{
             }
         });
 
+        Button webServiceActivity = (Button) findViewById(R.id.buttonWeb);
+
+        webServiceActivity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentWebService = new Intent(MainActivity.this,ActivityWebService.class);
+                startActivity(intentWebService);
+            }
+        });
+
+
+
 
         textview = (TextView) findViewById(R.id.name_txt);
         showBtn = (Button) findViewById(R.id.show_name);
