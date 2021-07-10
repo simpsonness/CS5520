@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "819140422363",
+    "project_id": "chat-d6463",
+    "storage_bucket": "chat-d6463.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:819140422363:android:cfc6fdb1ab13d0388afafe",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.chatapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "819140422363-u4fbej4v4asfh3pggced4emrga8717hb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDaVfYWtKPi_wcbQZvLm4CMB4gOgk1k21A"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "819140422363-u4fbej4v4asfh3pggced4emrga8717hb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

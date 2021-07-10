@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "421534322405",
+    "project_id": "chat-up-9732b",
+    "storage_bucket": "chat-up-9732b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:421534322405:android:ee30542d5577b21c4c0e0c",
+        "android_client_info": {
+          "package_name": "edu.neu.madcourse.chatupapplication"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "421534322405-hul8joaidoalk3ruusrhrthe39um37ha.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBgDhzKuv1sbpw0p8ztUN-QmfoQiTlbjCo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "421534322405-hul8joaidoalk3ruusrhrthe39um37ha.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
