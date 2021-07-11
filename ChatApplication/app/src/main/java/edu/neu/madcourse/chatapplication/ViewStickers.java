@@ -79,7 +79,7 @@ public class ViewStickers extends AppCompatActivity {
                     newMessages.add(message);
                 }
 
-                //Collections.sort(newMessages, new SortByDate);
+                Collections.reverse(newMessages);
 
                 messages.clear();
                 messages.addAll(newMessages);
@@ -92,17 +92,6 @@ public class ViewStickers extends AppCompatActivity {
             }
         });
     }
-
-    /**
-    public static class SortByDate implements Comparator<Message>
-    {
-        @Override
-        public int compare (Message o1 , Message o2 )
-        {
-            return Utils.parseTime(o1.time).compareTo(Utils.parseTime(o2.time));
-        }
-    }
-     */
 
     //copied from MainActivity2
     private void request_user_name() {
