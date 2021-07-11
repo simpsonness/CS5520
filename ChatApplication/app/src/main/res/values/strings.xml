@@ -3,6 +3,9 @@
     <string name="send_sticker">Send Sticker</string>
     <string name="view_stickers">View Stickers</string>
     <string name="welcome_to_chat_app">Welcome to Chat App</string>
+    <string name="send_prompt">Would you like to send a sticker?</string>
+    <string name="username_hint">Recipient Username</string>
+    <string name="enter_username">Enter username of the recipient:</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
