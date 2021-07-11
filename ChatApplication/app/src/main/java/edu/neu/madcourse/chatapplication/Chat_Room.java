@@ -6,6 +6,8 @@ import androidx.core.app.NotificationManagerCompat;
 
 import android.app.PendingIntent;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -105,12 +107,18 @@ public class Chat_Room extends AppCompatActivity {
                 new Intent(this, FakeCallActivity.class), 0);
 
         String channelId = "1";
+
+        Bitmap foo = BitmapFactory.decodeResource(getResources(), R.drawable.foo);
+
+
         NotificationCompat.Builder notifyBuild = new NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.foo)
                 .setContentTitle("New mail from " + this.user_name)
                 .setContentText(this.input_msg.getText())
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(false)
+                .setStyle(new NotificationCompat.BigPictureStyle()
+                        .bigPicture(foo))
                 //.addAction(R.drawable.foo, "Call", callIntent)
                 .setContentIntent(pIntent);
 
