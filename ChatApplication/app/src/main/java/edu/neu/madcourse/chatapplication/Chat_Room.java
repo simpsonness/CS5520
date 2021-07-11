@@ -1,7 +1,5 @@
 package edu.neu.madcourse.chatapplication;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
@@ -32,26 +30,28 @@ public class Chat_Room extends AppCompatActivity {
     private String user_name, room_name;
     private DatabaseReference root;
     private String temp_key;
+    private String chat_msg, chat_user_name;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.chat_room);
 
-        btn_send_msg = (Button) findViewById(R.id.btn_send);
-        input_msg = (EditText) findViewById(R.id.msg_input);
-        chat_conversation = (TextView) findViewById(R.id.textView);
+        this.btn_send_msg = (Button) findViewById(R.id.btn_send);
+        this.input_msg = (EditText) findViewById(R.id.msg_input);
+        this.chat_conversation = (TextView) findViewById(R.id.textView);
 
-        user_name = getIntent().getExtras().get("user_name").toString();
-        room_name = getIntent().getExtras().get("room_name").toString();
-        setTitle("Room - "+room_name);
+        this.user_name = getIntent().getExtras().get("user_name").toString();
+        this.room_name = getIntent().getExtras().get("room_name").toString();
+        setTitle("Room - " + this.room_name);
 
-        root = FirebaseDatabase.getInstance().getReference().child(room_name);
+        this.root = FirebaseDatabase.getInstance().getReference().child(this.room_name);
 
-        btn_send_msg.setOnClickListener(new View.OnClickListener() {
+        this.btn_send_msg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Map<String,Object> map = new HashMap<String, Object>();
+                Map<String, Object> map = new HashMap<String, Object>();
                 temp_key = root.push().getKey();
                 root.updateChildren(map);
 
@@ -66,77 +66,55 @@ public class Chat_Room extends AppCompatActivity {
             }
         });
 
-        root.addChildEventListener(new ChildEventListener() {
+        this.root.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
-                append_chat_converstaion(dataSnapshot);
-
-
+                append_chat_conversation(dataSnapshot);
             }
 
             @Override
             public void onChildChanged(DataSnapshot dataSnapshot, String s){
-                append_chat_converstaion(dataSnapshot);
-
+                append_chat_conversation(dataSnapshot);
             }
 
             @Override
-            public void onChildRemoved(DataSnapshot dataSnapshotsnapshot) {
-
-            }
+            public void onChildRemoved(DataSnapshot dataSnapshotsnapshot) {}
 
             @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String s){
-            }
+            public void onChildMoved(DataSnapshot dataSnapshot, String s){}
 
             @Override
-            public void onCancelled(DatabaseError error) {
-
-            }
+            public void onCancelled(DatabaseError error) {}
         });
     }
 
-    private String chat_msg, chat_user_name;
-    private void append_chat_converstaion(DataSnapshot dataSnapshot) {
-
+    private void append_chat_conversation(DataSnapshot dataSnapshot) {
         Iterator i = dataSnapshot.getChildren().iterator();
         while (i.hasNext()){
-            chat_msg = (String) ((DataSnapshot)i.next()).getValue();
-            chat_user_name = (String) ((DataSnapshot)i.next()).getValue();
-
-            chat_conversation.append(chat_user_name+" : "+chat_msg+" \n");
-
+            this.chat_msg = (String) ((DataSnapshot)i.next()).getValue();
+            this.chat_user_name = (String) ((DataSnapshot)i.next()).getValue();
+            this.chat_conversation.append(this.chat_user_name + " : " + this.chat_msg + " \n");
         }
     }
 
 
     public void sendNotification(View view) {
-
-        // Prepare intent which is triggered if the
-        // notification is selected
         Intent intent = new Intent(this, Chat_Room.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
         PendingIntent callIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(),
                 new Intent(this, FakeCallActivity.class), 0);
 
-
-        // Build notification
-        // Need to define a channel ID after Android Oreo
-        //String channelId = getString(R.string.channel_id);
         String channelId = "1";
         NotificationCompat.Builder notifyBuild = new NotificationCompat.Builder(this, channelId)
-                //"Notification icons must be entirely white."
                 .setSmallIcon(R.drawable.foo)
-                .setContentTitle("New mail from " + "test@test.com")
-                .setContentText("Subject")
+                .setContentTitle("New mail from " + this.user_name)
+                .setContentText(this.input_msg.getText())
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
-                // hide the notification after its selected
-                .setAutoCancel(true)
-                .addAction(R.drawable.foo, "Call", callIntent)
+                .setAutoCancel(false)
+                //.addAction(R.drawable.foo, "Call", callIntent)
                 .setContentIntent(pIntent);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
-        // // notificationId is a unique int for each notification that you must define
         notificationManager.notify(0, notifyBuild.build());
 
     }
