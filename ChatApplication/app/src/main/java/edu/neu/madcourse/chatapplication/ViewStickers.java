@@ -27,6 +27,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import edu.neu.madcourse.chatapplication.models.Message;
@@ -44,13 +46,6 @@ public class ViewStickers extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.view_stickers);
 
-        //get the current user
-        //request if not logged in before
-        username = Utils.readUsername(ViewStickers.this);
-        if (username.equals("")) {
-            request_user_name();
-        }
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         rvMessages = (RecyclerView) findViewById(R.id.messagesRV);
@@ -59,15 +54,32 @@ public class ViewStickers extends AppCompatActivity {
         rvMessages.setAdapter(adapter);
         rvMessages.setLayoutManager(new LinearLayoutManager(this));
 
+
+        //get the current user
+        //request if not logged in before
+        String newUsername = Utils.readUsername(ViewStickers.this);
+        if (newUsername.equals("")) {
+            request_user_name();
+        } else {
+            username = newUsername;
+            triggerLoadFromDb();
+        }
+
+
+    }
+
+    private void triggerLoadFromDb() {
         //retrieve sticker messages
         mDatabase.child("stickerMessages").child(username).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 ArrayList<Message> newMessages = new ArrayList<>();
-                for (DataSnapshot postSnapshot: snapshot.getChildren()) {
+                for (DataSnapshot postSnapshot : snapshot.getChildren()) {
                     Message message = postSnapshot.getValue(Message.class);
                     newMessages.add(message);
                 }
+
+                //Collections.sort(newMessages, new SortByDate);
 
                 messages.clear();
                 messages.addAll(newMessages);
@@ -79,9 +91,18 @@ public class ViewStickers extends AppCompatActivity {
                 Toast.makeText(ViewStickers.this, "Could not load your stickers :(", Toast.LENGTH_SHORT).show();
             }
         });
-
-
     }
+
+    /**
+    public static class SortByDate implements Comparator<Message>
+    {
+        @Override
+        public int compare (Message o1 , Message o2 )
+        {
+            return Utils.parseTime(o1.time).compareTo(Utils.parseTime(o2.time));
+        }
+    }
+     */
 
     //copied from MainActivity2
     private void request_user_name() {
@@ -94,8 +115,12 @@ public class ViewStickers extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                username = input_field.getText().toString();
-                Utils.writeUsername(ViewStickers.this, username);
+                String newUsername = input_field.getText().toString();
+                if (!newUsername.equalsIgnoreCase("")) {
+                    Utils.writeUsername(ViewStickers.this, newUsername);
+                    username = newUsername;
+                    triggerLoadFromDb();
+                }
             }
         });
 
@@ -112,6 +137,13 @@ public class ViewStickers extends AppCompatActivity {
 
     public void openSend(View view) {
         Intent intent = new Intent(this, SendSticker.class);
+        startActivity(intent);
+    }
+
+    public void switchUser(View view) {
+        Utils.writeUsername(ViewStickers.this, "");
+        Intent intent = getIntent();
+        finish();
         startActivity(intent);
     }
 

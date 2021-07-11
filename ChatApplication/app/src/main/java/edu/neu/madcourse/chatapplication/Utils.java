@@ -17,8 +17,11 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Properties;
@@ -44,6 +47,12 @@ public class Utils {
         LocalDateTime now = LocalDateTime.now();
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a 'on' yyyy.MM.dd");
         return formatter.format(now);
+    }
+
+    public static LocalDateTime parseTime(String time) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a 'on' yyyy.MM.dd");
+        LocalDateTime localDateTime = LocalDateTime.from(formatter.parse(time));
+        return localDateTime;
     }
 
     public static String convertStreamToString(InputStream inputStream) {

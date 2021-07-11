@@ -1,7 +1,9 @@
 package edu.neu.madcourse.chatapplication;
 
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -12,6 +14,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -102,6 +106,7 @@ public class SendSticker extends AppCompatActivity {
 
         //clear the input
         editText.setText("");
+        sendNotification(to, username, sticker, newMessage.time);
     }
 
     public void clickMustache(View view) {
@@ -134,5 +139,25 @@ public class SendSticker extends AppCompatActivity {
 
     public void clickSilly(View view) {
         sendSticker("silly");
+    }
+
+    public void sendNotification(String to, String from, String sticker, String time) {
+        Intent intent = new Intent(this, Chat_Room.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+        PendingIntent callIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(),
+                new Intent(this, FakeCallActivity.class), 0);
+
+        String channelId = "1";
+        NotificationCompat.Builder notifyBuild = new NotificationCompat.Builder(this, channelId)
+                .setSmallIcon(R.drawable.foo)
+                .setContentTitle("New sticker posted by " + from)
+                .setContentText(from + " sent a " + sticker + " to " + to)
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setAutoCancel(false)
+                //.addAction(R.drawable.foo, "Call", callIntent)
+                .setContentIntent(pIntent);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        notificationManager.notify(0, notifyBuild.build());
     }
 }
