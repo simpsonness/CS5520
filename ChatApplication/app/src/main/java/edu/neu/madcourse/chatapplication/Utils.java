@@ -1,9 +1,11 @@
 package edu.neu.madcourse.chatapplication;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.content.res.AssetManager;
 import android.os.Handler;
 import android.os.Looper;
+import android.preference.PreferenceManager;
 import android.widget.Toast;
 
 import org.json.JSONObject;
@@ -16,6 +18,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.Properties;
 
@@ -34,6 +38,12 @@ public class Utils {
         Date dNow = new Date();
         SimpleDateFormat ft = new SimpleDateFormat("yyyy-MM-dd");
         return ft.format(dNow);
+    }
+
+    public static String time() {
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("hh:mm a 'on' yyyy.MM.dd");
+        return formatter.format(now);
     }
 
     public static String convertStreamToString(InputStream inputStream) {
@@ -106,5 +116,16 @@ public class Utils {
 
     }
 
+    public static String readUsername(Context context) {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+        return settings.getString("USERNAME", "");
+    }
+
+    public static void writeUsername(Context context, String username) {
+        SharedPreferences settings = PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("USERNAME", username);
+        editor.apply();
+    }
 
 }

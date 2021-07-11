@@ -29,7 +29,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     public void startSendStickerActivity(View view) {
-        startActivity(new Intent(MainActivity.this, SendSticker.class));
+        Intent intent = new Intent(MainActivity.this, SendSticker.class);
+        startActivity(intent);
     }
 
     public void startViewStickersActivity(View view) {

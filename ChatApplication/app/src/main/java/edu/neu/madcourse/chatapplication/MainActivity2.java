@@ -125,6 +125,7 @@ public class MainActivity2 extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 name = input_field.getText().toString();
+                Utils.writeUsername(MainActivity2.this, name);
             }
         });
 

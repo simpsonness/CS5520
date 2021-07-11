@@ -11,6 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.ChatApplication">
+        <activity android:name=".SendSticker"/>
+        <activity android:name=".ViewStickers"/>
         <activity android:name=".Chat_Room"></activity>
         <activity android:name=".MainActivity2" />
         <activity android:name=".MainActivity">
