@@ -1,8 +1,11 @@
 package edu.neu.madcourse.chatapplication;
 
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.icu.text.Edits;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
@@ -106,6 +109,9 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
 
+        createNotificationChannel();
+
+
     }
 
     private void request_user_name() {
@@ -131,6 +137,24 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
         builder.show();
+    }
+
+    public void createNotificationChannel() {
+        // This must be called early because it must be called before a notification is sent.
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            //CharSequence name = getString(R.string.channel_name);
+            CharSequence name = "Channel Name";
+            //String description = getString(R.string.channel_description);
+            String description = "Channel Description";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            //NotificationChannel channel = new NotificationChannel(getString(R.string.channel_id), name, importance);
+            NotificationChannel channel = new NotificationChannel("1", name, importance);
+            channel.setDescription(description);
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
     }
 
 }

@@ -3,7 +3,11 @@ package edu.neu.madcourse.chatapplication;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -57,6 +61,8 @@ public class Chat_Room extends AppCompatActivity {
                 map2.put("msg", input_msg.getText().toString());
 
                 message_root.updateChildren(map2);
+
+                sendNotification(v);
             }
         });
 
@@ -64,6 +70,7 @@ public class Chat_Room extends AppCompatActivity {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String s) {
                 append_chat_converstaion(dataSnapshot);
+
 
             }
 
@@ -100,5 +107,37 @@ public class Chat_Room extends AppCompatActivity {
             chat_conversation.append(chat_user_name+" : "+chat_msg+" \n");
 
         }
+    }
+
+
+    public void sendNotification(View view) {
+
+        // Prepare intent which is triggered if the
+        // notification is selected
+        Intent intent = new Intent(this, Chat_Room.class);
+        PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
+        PendingIntent callIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(),
+                new Intent(this, FakeCallActivity.class), 0);
+
+
+        // Build notification
+        // Need to define a channel ID after Android Oreo
+        //String channelId = getString(R.string.channel_id);
+        String channelId = "1";
+        NotificationCompat.Builder notifyBuild = new NotificationCompat.Builder(this, channelId)
+                //"Notification icons must be entirely white."
+                .setSmallIcon(R.drawable.foo)
+                .setContentTitle("New mail from " + "test@test.com")
+                .setContentText("Subject")
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                // hide the notification after its selected
+                .setAutoCancel(true)
+                .addAction(R.drawable.foo, "Call", callIntent)
+                .setContentIntent(pIntent);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
+        // // notificationId is a unique int for each notification that you must define
+        notificationManager.notify(0, notifyBuild.build());
+
     }
 }
