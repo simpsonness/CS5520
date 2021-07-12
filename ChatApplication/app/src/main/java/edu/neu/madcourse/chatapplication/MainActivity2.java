@@ -116,7 +116,7 @@ public class MainActivity2 extends AppCompatActivity {
 
     private void request_user_name() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter name:");
+        builder.setTitle("Enter Username:");
 
         final EditText input_field = new EditText(this);
 

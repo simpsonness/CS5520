@@ -66,7 +66,7 @@ public class SendSticker extends AppCompatActivity {
     //copied from MainActivity2
     private void request_user_name() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Enter name:");
+        builder.setTitle("Enter Username:");
 
         final EditText input_field = new EditText(this);
 
