@@ -4,6 +4,8 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -141,6 +143,7 @@ public class SendSticker extends AppCompatActivity {
         sendSticker("silly");
     }
 
+
     public void sendNotification(String to, String from, String sticker, String time) {
         Intent intent = new Intent(this, Chat_Room.class);
         PendingIntent pIntent = PendingIntent.getActivity(this, (int) System.currentTimeMillis(), intent, 0);
@@ -148,16 +151,42 @@ public class SendSticker extends AppCompatActivity {
                 new Intent(this, FakeCallActivity.class), 0);
 
         String channelId = "1";
+        Bitmap foo;
+
+        if (sticker.equalsIgnoreCase("dead")) {
+            foo = BitmapFactory.decodeResource(getResources(), R.drawable.dead);
+        } else if (sticker.equalsIgnoreCase("drooling")) {
+            foo = BitmapFactory.decodeResource(getResources(), R.drawable.drooling);
+        } else if (sticker.equalsIgnoreCase("famous")) {
+            foo = BitmapFactory.decodeResource(getResources(), R.drawable.famous);
+        } else if (sticker.equalsIgnoreCase("monocle")) {
+            foo = BitmapFactory.decodeResource(getResources(), R.drawable.monocle);
+        } else if (sticker.equalsIgnoreCase("mustache")) {
+            foo = BitmapFactory.decodeResource(getResources(), R.drawable.mustache);
+        } else if (sticker.equalsIgnoreCase("party")) {
+            foo = BitmapFactory.decodeResource(getResources(), R.drawable.party);
+        } else if (sticker.equalsIgnoreCase("plus_one")) {
+            foo = BitmapFactory.decodeResource(getResources(), R.drawable.plus_one);
+        } else if (sticker.equalsIgnoreCase("silly")) {
+            foo = BitmapFactory.decodeResource(getResources(), R.drawable.silly);
+        } else {
+            foo = BitmapFactory.decodeResource(getResources(), R.drawable.foo);
+        }
+
+
         NotificationCompat.Builder notifyBuild = new NotificationCompat.Builder(this, channelId)
                 .setSmallIcon(R.drawable.foo)
                 .setContentTitle("New sticker posted by " + from)
                 .setContentText(from + " sent a " + sticker + " to " + to)
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setAutoCancel(false)
+                .setStyle(new NotificationCompat.BigPictureStyle()
+                        .bigPicture(foo))
                 //.addAction(R.drawable.foo, "Call", callIntent)
                 .setContentIntent(pIntent);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(this);
         notificationManager.notify(0, notifyBuild.build());
+
     }
 }
