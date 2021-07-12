@@ -13,9 +13,7 @@
         android:theme="@style/Theme.ChatApplication">
         <activity android:name=".SendSticker"/>
         <activity android:name=".ViewStickers"/>
-        <activity android:name=".Chat_Room"></activity>
-        <activity android:name=".SendSticker"></activity>
-        <activity android:name=".ViewStickers"></activity>
+        <activity android:name=".Chat_Room"/>
 
         <activity android:name=".MainActivity2" />
         <activity android:name=".MainActivity">
