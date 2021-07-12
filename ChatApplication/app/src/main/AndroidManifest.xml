@@ -14,8 +14,12 @@
         <activity android:name=".SendSticker"/>
         <activity android:name=".ViewStickers"/>
         <activity android:name=".Chat_Room"></activity>
+        <activity android:name=".SendSticker"></activity>
+        <activity android:name=".ViewStickers"></activity>
+
         <activity android:name=".MainActivity2" />
         <activity android:name=".MainActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
