@@ -16,7 +16,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mainActivityButton = (Button) findViewById(R.id.viewMainActivity2);
+        mainActivityButton = (Button) findViewById(R.id.enterChatroom);
         mainActivityButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

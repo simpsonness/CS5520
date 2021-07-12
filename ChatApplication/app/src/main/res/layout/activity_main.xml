@@ -25,8 +25,8 @@
         android:layout_height="wrap_content"
         android:onClick="startSendStickerActivity"
         android:text="@string/send_sticker"
-        app:layout_constraintBottom_toTopOf="@id/viewStickers"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/enterChatroom"
+        app:layout_constraintEnd_toStartOf="@id/viewStickers"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/welcome" />
 
@@ -36,16 +36,17 @@
         android:layout_height="wrap_content"
         android:onClick="startViewStickersActivity"
         android:text="@string/view_stickers"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/enterChatroom"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sendSticker" />
+        app:layout_constraintTop_toBottomOf="@+id/welcome"
+        app:layout_constraintStart_toEndOf="@id/sendSticker"
+        app:layout_constraintVertical_bias="2" />
 
     <Button
-        android:id="@+id/viewMainActivity2"
+        android:id="@+id/enterChatroom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="view MainActivity2"
+        android:text="Enter Chatroom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
